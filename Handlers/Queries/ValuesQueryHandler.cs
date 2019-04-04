@@ -1,15 +1,24 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MediatorPatternExample.Models.DTOs;
+using AutoMapper;
+using MediatorPatternExample.Models;
 using MediatorPatternExample.Models.Queries;
+using MediatorPatternExample.Repositories;
 
 namespace MediatorPatternExample.Handlers.Queries
 {
-    public class ValuesQueryHandler : IRequestHandler<ValuesQuery, IEnumerable<ValueDTO>>
+    public class ValuesQueryHandler : IRequestHandler<ValuesQuery, IEnumerable<ValueModel>>
     {
-        public Task<IEnumerable<ValueDTO>> Handle(ValuesQuery request)
+        private readonly IValuesReadRepository _valuesReadRepository;
+        private readonly IMapper _mapper;
+
+        public ValuesQueryHandler(IValuesReadRepository valuesReadRepository, IMapper mapper)
         {
-            throw new System.NotImplementedException();
+            _valuesReadRepository = valuesReadRepository;
+            _mapper = mapper;
         }
+
+        public async Task<IEnumerable<ValueModel>> Handle(ValuesQuery request) =>
+            _mapper.Map<IEnumerable<ValueModel>>(await _valuesReadRepository.Get());
     }
 }

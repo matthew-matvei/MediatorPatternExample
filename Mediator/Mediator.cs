@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using MediatorPatternExample.Handlers;
 using Microsoft.Extensions.DependencyInjection;
