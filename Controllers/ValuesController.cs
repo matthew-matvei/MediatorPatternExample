@@ -1,5 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using MediatorPatternExample.Mediator;
 using MediatorPatternExample.Models.Commands;
+using MediatorPatternExample.Models.DTOs;
+using MediatorPatternExample.Models.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediatorPatternExample.Controllers
@@ -8,10 +13,17 @@ namespace MediatorPatternExample.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly IMediator _mediator;
+
+        public ValuesController(IMediator mediator)
         {
-            return Ok();
+            _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _mediator.Dispatch<ValuesQuery, IEnumerable<ValueDTO>>(new ValuesQuery()));
         }
 
         [HttpGet("{id}")]
