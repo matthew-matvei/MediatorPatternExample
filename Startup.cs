@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using MediatorPatternExample.Mediator;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MediatorPatternExample
@@ -10,6 +10,7 @@ namespace MediatorPatternExample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient<IMediator, Mediator.Mediator>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
