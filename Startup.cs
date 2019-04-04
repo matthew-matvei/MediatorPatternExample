@@ -1,12 +1,6 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatorPatternExample.Extensions;
-using MediatorPatternExample.Handlers;
-using MediatorPatternExample.Handlers.Queries;
 using MediatorPatternExample.Mediator;
-using MediatorPatternExample.Models;
-using MediatorPatternExample.Models.Queries;
-using MediatorPatternExample.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,11 +11,14 @@ namespace MediatorPatternExample
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper();
-            services.AddMvc();
-            services.AddTransient<IMediator, Mediator.Mediator>();
-            services.AddRequestHandlers();
-            services.AddTransient<IValuesReadRepository, ValuesReadRepository>();
+            services
+                .AddAutoMapper()
+                .AddMvc();
+
+            services
+                .AddTransient<IMediator, Mediator.Mediator>()
+                .AddRequestHandlers()
+                .AddPersistence();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
