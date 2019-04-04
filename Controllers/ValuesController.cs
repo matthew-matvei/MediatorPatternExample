@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatorPatternExample.Mediator;
+using MediatorPatternExample.Models;
 using MediatorPatternExample.Models.Commands;
 using MediatorPatternExample.Models.DTOs;
 using MediatorPatternExample.Models.Queries;
@@ -14,16 +16,18 @@ namespace MediatorPatternExample.Controllers
     public class ValuesController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public ValuesController(IMediator mediator)
+        public ValuesController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _mediator.Dispatch<ValuesQuery, IEnumerable<ValueDTO>>());
+            return Ok(_mapper.Map<IEnumerable<ValueDTO>>(await _mediator.Dispatch<ValuesQuery, IEnumerable<ValueModel>>()));
         }
 
         [HttpGet("{id}")]
