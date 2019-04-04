@@ -8,5 +8,15 @@ namespace MediatorPatternExample.Mediator
         {
             throw new System.NotImplementedException();
         }
+
+        public Task<TResult> Dispatch<TRequest, TResult>() where TRequest : new()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<TResult> Dispatch<TResult>(object request)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

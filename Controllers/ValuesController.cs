@@ -23,7 +23,7 @@ namespace MediatorPatternExample.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _mediator.Dispatch<ValuesQuery, IEnumerable<ValueDTO>>(new ValuesQuery()));
+            return Ok(await _mediator.Dispatch<ValuesQuery, IEnumerable<ValueDTO>>());
         }
 
         [HttpGet("{id}")]
