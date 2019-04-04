@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using MediatorPatternExample.Extensions;
 using MediatorPatternExample.Handlers;
 using MediatorPatternExample.Handlers.Queries;
 using MediatorPatternExample.Mediator;
@@ -19,7 +20,7 @@ namespace MediatorPatternExample
             services.AddAutoMapper();
             services.AddMvc();
             services.AddTransient<IMediator, Mediator.Mediator>();
-            services.AddTransient<IRequestHandler<ValuesQuery, IEnumerable<ValueModel>>, ValuesQueryHandler>();
+            services.AddRequestHandlers();
             services.AddTransient<IValuesReadRepository, ValuesReadRepository>();
         }
 

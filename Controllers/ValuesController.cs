@@ -31,9 +31,9 @@ namespace MediatorPatternExample.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(Guid id)
+        public async Task<IActionResult> Get(int id)
         {
-            return Ok();
+            return Ok(_mapper.Map<ValueDTO>(await _mediator.Dispatch<ValueQuery, ValueModel>(new ValueQuery { Id = id })));
         }
 
         [HttpPost]

@@ -7,5 +7,6 @@ namespace MediatorPatternExample.Repositories
     public interface IValuesReadRepository
     {
         Task<IEnumerable<ValueEntity>> Get();
+        Task<ValueEntity> Get(int id);
     }
 }
