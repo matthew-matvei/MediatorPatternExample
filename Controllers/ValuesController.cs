@@ -37,9 +37,9 @@ namespace MediatorPatternExample.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CreateValueCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateValueCommand command)
         {
-            return Ok();
+            return Ok(_mapper.Map<ValueDTO>(await _mediator.Dispatch<CreateValueCommand, ValueModel>(command)));
         }
 
         [HttpPut("{id}")]
