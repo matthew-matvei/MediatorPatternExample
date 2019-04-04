@@ -1,22 +1,32 @@
+using System;
 using System.Threading.Tasks;
+using MediatorPatternExample.Handlers;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MediatorPatternExample.Mediator
 {
     public class Mediator : IMediator
     {
-        public Task<TResult> Dispatch<TRequest, TResult>(TRequest request)
+        private readonly IServiceScopeFactory _serviceScopeFactory;
+
+        public Mediator(IServiceScopeFactory serviceScopeFactory)
         {
-            throw new System.NotImplementedException();
+            _serviceScopeFactory = serviceScopeFactory;
         }
 
-        public Task<TResult> Dispatch<TRequest, TResult>() where TRequest : new()
-        {
-            throw new System.NotImplementedException();
-        }
+        public Task<TResult> Dispatch<TRequest, TResult>(TRequest request) =>
+            DispatchPrivate<TRequest, TResult>(request);
 
-        public Task<TResult> Dispatch<TResult>(object request)
+        public Task<TResult> Dispatch<TRequest, TResult>() where TRequest : new() =>
+            DispatchPrivate<TRequest, TResult>(new TRequest());
+
+        private async Task<TResult> DispatchPrivate<TRequest, TResult>(TRequest request)
         {
-            throw new System.NotImplementedException();
+            using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                var handler = scope.ServiceProvider.GetRequiredService<IRequestHandler<TRequest, TResult>>();
+                return await handler.Handle(request);
+            }
         }
     }
 }

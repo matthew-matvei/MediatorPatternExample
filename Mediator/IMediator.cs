@@ -6,6 +6,5 @@ namespace MediatorPatternExample.Mediator
     {
         Task<TResult> Dispatch<TRequest, TResult>(TRequest request);
         Task<TResult> Dispatch<TRequest, TResult>() where TRequest : new();
-        Task<TResult> Dispatch<TResult>(object request);
     }
 }
