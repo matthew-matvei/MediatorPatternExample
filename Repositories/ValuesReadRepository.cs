@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatorPatternExample.Exceptions;
 using MediatorPatternExample.Models.Entities;
 
 namespace MediatorPatternExample.Repositories
@@ -11,7 +12,8 @@ namespace MediatorPatternExample.Repositories
             await Task.FromResult(FakeData);
 
         public async Task<ValueEntity> Get(int id) =>
-            await Task.FromResult(FakeData.FirstOrDefault(value => value.Id == id));
+            await Task.FromResult(FakeData.FirstOrDefault(value => value.Id == id) ??
+                throw new ValueNotFoundException(id));
 
         private static IEnumerable<ValueEntity> FakeData => new[]
             {

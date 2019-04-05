@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatorPatternExample.Extensions;
 using MediatorPatternExample.Mediator;
+using MediatorPatternExample.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,12 +24,9 @@ namespace MediatorPatternExample
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseMvc();
+            app
+                .UseMiddleware<ExceptionHandler>()
+                .UseMvc();
         }
     }
 }
