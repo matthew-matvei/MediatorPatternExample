@@ -19,6 +19,7 @@ namespace MediatorPatternExample
             services
                 .AddTransient<IMediator, Mediator.Mediator>()
                 .AddRequestHandlers()
+                .AddValidators()
                 .AddPersistence();
         }
 
