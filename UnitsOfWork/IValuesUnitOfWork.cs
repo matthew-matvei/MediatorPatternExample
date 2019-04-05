@@ -7,5 +7,6 @@ namespace MediatorPatternExample.UnitsOfWork
     public interface IValuesUnitOfWork
     {
         Task<ValueEntity> Create(ValueModel value);
+        Task Update(ValueModel value);
     }
 }

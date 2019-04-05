@@ -6,4 +6,9 @@ namespace MediatorPatternExample.Handlers
     {
         Task<TResult> Handle(TRequest request);
     }
+
+    public interface IRequestHandler<TRequest>
+    {
+        Task Handle(TRequest request);
+    }
 }

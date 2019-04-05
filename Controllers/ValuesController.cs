@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using MediatorPatternExample.Extensions;
 using MediatorPatternExample.Mediator;
 using MediatorPatternExample.Models;
 using MediatorPatternExample.Models.Commands;
@@ -42,9 +43,10 @@ namespace MediatorPatternExample.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(Guid id, [FromBody] UpdateValueCommand command)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateValueCommand command)
         {
-            return Ok();
+            await _mediator.Dispatch<UpdateValueCommandWithId>(_mapper.Map<UpdateValueCommandWithId>(command).With(_ => _.Id = id));
+            return NoContent();
         }
     }
 }

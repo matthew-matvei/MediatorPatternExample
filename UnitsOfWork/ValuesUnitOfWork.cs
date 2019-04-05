@@ -13,5 +13,8 @@ namespace MediatorPatternExample.UnitsOfWork
                 Name = value.Name,
                 Value = value.Value
             });
+
+        public Task Update(ValueModel value) =>
+            Task.CompletedTask;
     }
 }

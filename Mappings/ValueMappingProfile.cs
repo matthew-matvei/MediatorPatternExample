@@ -13,6 +13,8 @@ namespace MediatorPatternExample.Mappings
             CreateMap<ValueEntity, ValueModel>();
             CreateMap<ValueModel, ValueDTO>();
             CreateMap<CreateValueCommand, ValueModel>();
+            CreateMap<UpdateValueCommand, UpdateValueCommandWithId>();
+            CreateMap<UpdateValueCommandWithId, ValueModel>();
         }
     }
 }
