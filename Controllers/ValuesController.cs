@@ -45,7 +45,7 @@ namespace MediatorPatternExample.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateValueCommand command)
         {
-            await _mediator.Dispatch<UpdateValueCommandWithId>(_mapper.Map<UpdateValueCommandWithId>(command).With(_ => _.Id = id));
+            await _mediator.Dispatch<UpdateValueCommand.WithId>(_mapper.Map<UpdateValueCommand.WithId>(command).With(_ => _.Id = id));
             return NoContent();
         }
     }

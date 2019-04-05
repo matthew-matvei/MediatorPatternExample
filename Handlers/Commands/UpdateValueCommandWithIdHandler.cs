@@ -6,7 +6,7 @@ using MediatorPatternExample.UnitsOfWork;
 
 namespace MediatorPatternExample.Handlers.Commands
 {
-    public class UpdateValueCommandWithIdHandler : IRequestHandler<UpdateValueCommandWithId>
+    public class UpdateValueCommandWithIdHandler : IRequestHandler<UpdateValueCommand.WithId>
     {
         private readonly IValuesUnitOfWork _valuesUnitOfWork;
         private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ namespace MediatorPatternExample.Handlers.Commands
             _mapper = mapper;
         }
 
-        public async Task Handle(UpdateValueCommandWithId request) =>
+        public async Task Handle(UpdateValueCommand.WithId request) =>
             await _valuesUnitOfWork.Update(_mapper.Map<ValueModel>(request));
     }
 }

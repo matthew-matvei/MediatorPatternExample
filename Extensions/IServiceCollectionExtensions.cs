@@ -30,7 +30,7 @@ namespace MediatorPatternExample.Extensions
                     new CreateValueCommandHandler(valuesUnitOfWork, mapper),
                     validator);
             });
-            services.AddTransient<IRequestHandler<UpdateValueCommandWithId>, UpdateValueCommandWithIdHandler>();
+            services.AddTransient<IRequestHandler<UpdateValueCommand.WithId>, UpdateValueCommandWithIdHandler>();
 
             return services;
         }
